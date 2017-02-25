@@ -49,3 +49,4 @@ jspm_packages
 .yarn-integrity
 /conf.js
 .idea/
+/admin-sdk-key.json

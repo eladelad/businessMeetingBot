@@ -3,10 +3,18 @@ var router = express.Router();
 var fs = require('fs');
 var request = require('request');
 var conf = require('../conf').conf;
-const util = require('util')
+var db = require('../firebaseConnector').db;
+const util = require('util');
 
 
-/* GET home page. */
+router.post('/firebase', function(req, res){
+    var ref = db.ref("server/data");
+    var vCardRef = ref.child("vCards");
+    var newVCardRef = vCardRef.push(req.body);
+    var vCardId = newVCardRef.key;
+    res.send(vCardId);
+});
+
 router.get('/', function(req, res, next) {
   // res.render('index', { title: 'Express' });
     var base64str = base64_encode('businesscard1.jpeg');
@@ -33,7 +41,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/webhook', function(req, res){
-   console.log(util.inspect(req.body, false, null));
+    var vCardId = req.body.id;
+    if (vCardId){
+        var ref = db.ref("server/data");
+        var vCardRef = ref.child("vCards").set(req.body);
+        console.log(vCardId);
+    } else {
+        console.log(req.body);
+    }
     res.status(200);
     res.send('ok');
 });
