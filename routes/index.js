@@ -26,6 +26,11 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/', function(req, res){
+   console.log(req);
+    res.statusCode(200);
+});
+
 
 function base64_encode(file) {
     // read binary data
