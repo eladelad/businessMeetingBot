@@ -3,6 +3,8 @@ var router = express.Router();
 var fs = require('fs');
 var request = require('request');
 var conf = require('../conf').conf;
+const util = require('util')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -31,7 +33,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/webhook', function(req, res){
-   console.log(req.body);
+   console.log(util.inspect(req.body, false, null));
     res.status(200);
     res.send('ok');
 });
