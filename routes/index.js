@@ -28,7 +28,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res){
    console.log(req);
-    res.statusCode(200);
+    res.status(200);
+    res.send('ok');
 });
 
 
