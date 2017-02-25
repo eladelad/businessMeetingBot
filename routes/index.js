@@ -43,8 +43,8 @@ router.get('/', function(req, res, next) {
 router.post('/webhook', function(req, res){
     var vCardId = req.body.id;
     if (vCardId){
-        var ref = db.ref("server/data");
-        var vCardRef = ref.child("vCards").set(req.body);
+        var vCardRef = db.ref("server/data/vCards");
+        var newVCardRef = vCardRef.child(vCardId).set(req.body);
         console.log(vCardId);
     } else {
         console.log(req.body);
